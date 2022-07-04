@@ -28,7 +28,7 @@ class EmployeController extends AbstractController
         $employe =new Employe();
 
 
-        $form =$this->createForm(EmployeFormType::class);
+        $form =$this->createForm(EmployeFormType::class, $employe);
 
 
         $form->handleRequest($request);
@@ -77,21 +77,29 @@ class EmployeController extends AbstractController
                 "form_employe" => $form->createView()
           ]);
 
-        }  // end function update
+        }  # end function update
 
-    }# end class
-
-
-    /**
-     * @Route("/supprimer-un-employe-{id}",name="employe_delete" methods={"GET"})
-     */
-      public function delate(Employe $employe, EntityManagerInterface $entityManager): RedirectResponse
-     {
-        
-        $entityManager->remove($employe);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('default_home');
-     } #end function delete()
     
-    }
+
+
+                /**
+                 * @Route("/supprimer-un-employe-{id}",name="employe_delete", methods={"GET"})
+                 */
+            public function delete(Employe $employe, EntityManagerInterface $entityManager): RedirectResponse
+         {
+        
+                $entityManager->remove($employe);
+                $entityManager->flush();
+         
+            return $this->redirectToRoute('default_home');
+           
+     
+        
+    } #end function delete()
+}# end class
+    
+
+
+
+
+    
